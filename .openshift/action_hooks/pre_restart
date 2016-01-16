@@ -64,7 +64,7 @@ if [ -z "$DB_DRIVER" ]; then
   echo "or"
   echo "rhc cartridge add -a $OPENSHIFT_APP_NAME -c postgresql-9.2" 1>&2
   echo "or"
-  echo "rhc cartridge add -a $OPENSHIFT_APP_NAME -c https://github.com/icflorescu/openshift-cartridge-mongodb/metadata/manifest.yml" 1>&2
+  echo "rhc cartridge add -a $OPENSHIFT_APP_NAME -c http://cartreflect-claytondev.rhcloud.com/github/icflorescu/openshift-cartridge-mongodb" 1>&2
   echo "then make a sample commit (add whitespace somewhere) and re-push" 1>&2
   echo 1>&2
   exit 5
