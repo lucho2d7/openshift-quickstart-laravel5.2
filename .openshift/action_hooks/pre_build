@@ -4,7 +4,7 @@
 # before the build step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
 
-if [[ "$OPENSHIFT_PHP_VERSION" != "5.5" ]]; then
+if [[ "$OPENSHIFT_PHP_VERSION" != "5.5.22" ]]; then
   echo "ERROR: This quickstart is only compatible with PHP 5.5 but current version is $OPENSHIFT_PHP_VERSION"
   echo "ERROR: Please use the https://github.com/boekkooi/openshift-cartridge-php catridge."
   exit 1
