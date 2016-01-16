@@ -3,7 +3,7 @@
 designed for the development of model–view–controller (MVC) web applications.
 
 This QuickStart was created to make it easy to get started with Laravel 5.2 on
-OpenShift.
+OpenShift. It is based on https://github.com/luciddreamz/laravel
 
 ## OpenShift Considerations ##
 These are some special considerations you may need to keep in mind when
