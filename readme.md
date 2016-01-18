@@ -5,6 +5,15 @@ designed for the development of model–view–controller (MVC) web applications
 This QuickStart was created to make it easy to get started with Laravel 5.2 on
 OpenShift. It is based on https://github.com/luciddreamz/laravel
 
+At this point it works in conjunction with the following cartridges:
+
+https://github.com/boekkooi/openshift-cartridge-php (with php version 5.5.22)
+https://github.com/boekkooi/openshift-cartridge-nginx
+
+And optionally with
+
+https://github.com/icflorescu/openshift-cartridge-mongodb
+
 ## OpenShift Considerations ##
 These are some special considerations you may need to keep in mind when
 running your application on OpenShift.
