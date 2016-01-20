@@ -13,7 +13,7 @@ echo "Installing laravel..." 1>&2
 composer global require "laravel/installer"
 echo 1>&2
 echo "Creating laravel project..." 1>&2
-composer create-project --prefer-dist laravel/laravel ${OPENSHIFT_REPO_DIR}temp12345
+composer create-project --prefer-dist laravel/laravel=5.2 ${OPENSHIFT_REPO_DIR}temp12345
 mv ${OPENSHIFT_REPO_DIR}temp12345/* ${OPENSHIFT_REPO_DIR}
 mv ${OPENSHIFT_REPO_DIR}temp12345/.[!.]* ${OPENSHIFT_REPO_DIR}
 
