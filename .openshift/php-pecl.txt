@@ -1,1 +1,1 @@
-mongo 1.6.12
+mongodb 1.1.2
