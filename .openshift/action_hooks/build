@@ -3,4 +3,7 @@ set -e
 
 # Build PHP extra's
 # Update conf/ini files and install pecl extensions
+
+pecl uninstall mongo
+
 ${OPENSHIFT_PHP_DIR}/bin/control build
