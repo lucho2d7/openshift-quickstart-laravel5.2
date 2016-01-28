@@ -7,8 +7,7 @@ OpenShift. It is based on https://github.com/luciddreamz/laravel
 
 At this point it works in conjunction with the following cartridges:
 
-https://github.com/boekkooi/openshift-cartridge-php (with php version 5.6.16)
-https://github.com/boekkooi/openshift-cartridge-nginx
+https://github.com/boekkooi/openshift-cartridge-php (with php version 5.6.16) https://github.com/boekkooi/openshift-cartridge-nginx
 
 And optionally with
 
@@ -24,7 +23,7 @@ remote development, found at `.env` and `.openshift/.env` respectively. When the
 repo is pushed to OpenShift `.env` is overwritten with the `.openshift/.env` file.
 
 ### Remote Development ###
-Your application is configured to automatically use your OpenShift MongoDB, MySQL or PostgreSQL
+Your application is configured to automatically use your OpenShift MySQL or PostgreSQL 
 database in when deployed on OpenShift using [OpenShift Environment Variables](https://developers.openshift.com/en/managing-environment-variables.html).
 
 Additionally, your `APP_ENV`, `APP_URL`, and `APP_KEY` will be set automatically in 
@@ -39,7 +38,6 @@ When the application is pushed to OpenShift, `php artisan migrate --force` is au
 
 ### Composer ###
 When the application is pushed, `composer install` is automatically executed over the root directory. See [PHP Markers](https://developers.openshift.com/en/php-markers.html) for more details on the 'use_composer' marker.
-
 
 ### 'Development' Mode ###
 When you develop your Laravel application in OpenShift, you can also enable the
@@ -90,12 +88,12 @@ To stop tailing the logs, press *Ctrl + c*.
 1. Create a Laravel application:
 
     ```
-    rhc app create laravelapp php-5.4 mysql-5.5 --from-code=https://github.com/luciddreamz/laravel
+    rhc app create laravelapp php-5.4 mysql-5.5 --from-code=https://github.com/lucho2d7/openshift-quickstart-laravel5.2
     ```
     or
 
     ```
-    rhc app create laravelapp php-5.4 postgresql-9.2 --from-code=https://github.com/luciddreamz/laravel
+    rhc app create laravelapp php-5.4 postgresql-9.2 --from-code=https://github.com/lucho2d7/openshift-quickstart-laravel5.2
     ```
 
 ## Additional Resources ##

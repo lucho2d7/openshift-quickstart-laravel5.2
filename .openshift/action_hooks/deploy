@@ -8,7 +8,8 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 set -e
 
-echo "Setting environment variables..."
+echo 1>&2
+echo "Setting environment variables..." 1>&2
 
 export APP_ENV="${APPLICATION_ENV:-production}"
 if [[ "${APPLICATION_ENV:-}" != "development" ]]; then
@@ -37,20 +38,20 @@ if [ ! -z "$OPENSHIFT_SECRET_TOKEN" ]; then
 fi
 
 if [ ! -z "$OPENSHIFT_POSTGRESQL_DB_HOST" ]; then
-  export DB_DRIVER="pgsql"
+  export DB_CONNECTION="pgsql"
 fi
 
 if [ ! -z "$OPENSHIFT_MYSQL_DB_HOST" ]; then
-  export DB_DRIVER="mysql"
+  export DB_CONNECTION="mysql"
 fi
 
 #if [ ! -z "$OPENSHIFT_MONGODB_DB_HOST" ]; then
-#  export DB_DRIVER="mongodb"
+#  export DB_CONNECTION="mongodb"
 #fi
 
 # This is to adapt to https://github.com/icflorescu/openshift-cartridge-mongodb because we need to use mongodb v3
 if [ ! -z "$MONGODB_URL" ]; then
-  export DB_DRIVER="mongodb"
+  export DB_CONNECTION="mongodb"
   
   if [ -z "$OPENSHIFT_MONGODB_DB_HOST" ]; then
     export OPENSHIFT_MONGODB_DB_HOST="$OPENSHIFT_GEAR_DNS"
@@ -73,7 +74,7 @@ if [ ! -z "$MONGODB_URL" ]; then
   fi
 fi
 
-if [ -z "$DB_DRIVER" ]; then
+if [ -z "$DB_CONNECTION" ]; then
   echo 1>&2
   echo "Could not find the database cartridge.  Please run:" 1>&2
   echo "rhc cartridge add -a $OPENSHIFT_APP_NAME -c mysql-5.5" 1>&2
@@ -86,14 +87,16 @@ if [ -z "$DB_DRIVER" ]; then
   exit 5
 else
   echo 1>&2
-  echo "Database driver set to '$DB_DRIVER'..." 1>&2
+  echo "Database driver set to '$DB_CONNECTION'..." 1>&2
   echo 1>&2
   if [ "$(type -t set_env_var)" == "function" ]; then
-    set_env_var 'DB_DRIVER' $DB_DRIVER $OPENSHIFT_HOMEDIR/.env/user_vars
+    set_env_var 'DB_CONNECTION' $DB_CONNECTION $OPENSHIFT_HOMEDIR/.env/user_vars
   fi
 fi
 
+echo 1>&2
 echo "Migrating storage and log directories..." 1>&2
+echo 1>&2
 # If this is initial installation, copy the default storage directory
 # from official Laravel installation and remove the log directory
 #
