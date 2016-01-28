@@ -8,17 +8,7 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 set -e
 
-echo 1>&2
-echo "Installing laravel..." 1>&2
-composer global require "laravel/installer"
-echo 1>&2
-echo "Creating laravel project..." 1>&2
-composer create-project --prefer-dist laravel/laravel=5.2 ${OPENSHIFT_REPO_DIR}temp12345
-mv ${OPENSHIFT_REPO_DIR}temp12345/* ${OPENSHIFT_REPO_DIR}
-mv ${OPENSHIFT_REPO_DIR}temp12345/.[!.]* ${OPENSHIFT_REPO_DIR}
-
-echo 1>&2
-echo "Setting environment variables..." 1>&2
+echo "Setting environment variables..."
 
 export APP_ENV="${APPLICATION_ENV:-production}"
 if [[ "${APPLICATION_ENV:-}" != "development" ]]; then
@@ -103,9 +93,7 @@ else
   fi
 fi
 
-echo 1>&2
 echo "Migrating storage and log directories..." 1>&2
-echo 1>&2
 # If this is initial installation, copy the default storage directory
 # from official Laravel installation and remove the log directory
 #
@@ -124,10 +112,3 @@ ln -sf ${OPENSHIFT_LOG_DIR}   ${OPENSHIFT_DATA_DIR}storage/logs
 if [  -f ${OPENSHIFT_REPO_DIR}.openshift/.env ]; then
   cp -f ${OPENSHIFT_REPO_DIR}.openshift/.env ${OPENSHIFT_REPO_DIR}/.env
 fi
-
-#echo 1>&2
-#echo "Running 'php artisan migrate --force'..." 1>&2
-#echo 1>&2
-#pushd ${OPENSHIFT_REPO_DIR} > /dev/null
-#php artisan migrate --force
-#popd > /dev/null
