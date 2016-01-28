@@ -7,7 +7,7 @@ OpenShift. It is based on https://github.com/luciddreamz/laravel
 
 At this point it works in conjunction with the following cartridges:
 
-https://github.com/boekkooi/openshift-cartridge-php (with php version 5.5.22)
+https://github.com/boekkooi/openshift-cartridge-php (with php version 5.6.16)
 https://github.com/boekkooi/openshift-cartridge-nginx
 
 And optionally with
