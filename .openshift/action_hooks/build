@@ -8,7 +8,7 @@ set -e
 
 if [ -f ${OPENSHIFT_REPO_DIR}artisan ]
 then
-	LARAVEL_VERSION = `php ${OPENSHIFT_REPO_DIR}artisan --version`
+	LARAVEL_VERSION=`php ${OPENSHIFT_REPO_DIR}artisan --version`
 	echo "Laravel project version $LARAVEL_VERSION already created."
 else 
 	echo "Installing laravel..."
@@ -19,7 +19,7 @@ else
 	composer create-project --prefer-dist laravel/laravel=5.2 ${OPENSHIFT_TMP_DIR}temp12345
 	mv ${OPENSHIFT_TMP_DIR}temp12345/* ${OPENSHIFT_REPO_DIR}
 	mv ${OPENSHIFT_TMP_DIR}temp12345/.[!.]* ${OPENSHIFT_REPO_DIR}
-	LARAVEL_VERSION = `php ${OPENSHIFT_REPO_DIR}artisan --version`
+	LARAVEL_VERSION=`php ${OPENSHIFT_REPO_DIR}artisan --version`
 	popd
 	rm -rf ${OPENSHIFT_TMP_DIR}temp12345
 	echo "Laravel project version $LARAVEL_VERSION successfully installed."
