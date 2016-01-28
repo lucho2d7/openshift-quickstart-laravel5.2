@@ -26,6 +26,7 @@ if [[ "${APPLICATION_ENV:-}" != "development" ]]; then
 else
   export APP_DEBUG=true
 fi
+
 if [ "$(type -t set_env_var)" == "function" ]; then
   set_env_var 'APP_ENV' $APP_ENV $OPENSHIFT_HOMEDIR/.env/user_vars
   set_env_var 'APP_DEBUG' $APP_DEBUG $OPENSHIFT_HOMEDIR/.env/user_vars

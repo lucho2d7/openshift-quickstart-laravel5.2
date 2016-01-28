@@ -8,8 +8,7 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 set -e
 
-echo 1>&2
-echo "Setting environment variables..." 1>&2
+echo "Setting environment variables..."
 
 export APP_ENV="${APPLICATION_ENV:-production}"
 if [[ "${APPLICATION_ENV:-}" != "development" ]]; then
@@ -17,6 +16,7 @@ if [[ "${APPLICATION_ENV:-}" != "development" ]]; then
 else
   export APP_DEBUG=true
 fi
+
 if [ "$(type -t set_env_var)" == "function" ]; then
   set_env_var 'APP_ENV' $APP_ENV $OPENSHIFT_HOMEDIR/.env/user_vars
   set_env_var 'APP_DEBUG' $APP_DEBUG $OPENSHIFT_HOMEDIR/.env/user_vars
@@ -44,8 +44,33 @@ if [ ! -z "$OPENSHIFT_MYSQL_DB_HOST" ]; then
   export DB_DRIVER="mysql"
 fi
 
-if [ ! -z "$OPENSHIFT_MONGODB_DB_HOST" ]; then
+#if [ ! -z "$OPENSHIFT_MONGODB_DB_HOST" ]; then
+#  export DB_DRIVER="mongodb"
+#fi
+
+# This is to adapt to https://github.com/icflorescu/openshift-cartridge-mongodb because we need to use mongodb v3
+if [ ! -z "$MONGODB_URL" ]; then
   export DB_DRIVER="mongodb"
+  
+  if [ -z "$OPENSHIFT_MONGODB_DB_HOST" ]; then
+    export OPENSHIFT_MONGODB_DB_HOST="$OPENSHIFT_GEAR_DNS"
+    echo "Mongo Host set to $OPENSHIFT_MONGODB_DB_HOST" 1>&2
+  fi
+  
+  if [ -z "$OPENSHIFT_MONGODB_DB_PORT" ]; then
+    if [ ! -z "$OPENSHIFT_MONGODB_PROXY_PORT" ]; then
+      export OPENSHIFT_MONGODB_DB_PORT="$OPENSHIFT_MONGODB_DB_PROXY_PORT" 1>&2
+    else
+      if [ ! -z "$OPENSHIFT_MONGODB_PORT" ]; then
+        export OPENSHIFT_MONGODB_DB_PORT="$OPENSHIFT_MONGODB_PORT" 1>&2
+      fi
+    fi
+
+    #export OPENSHIFT_MONGODB_DB_PORT="$OPENSHIFT_MONGODB_DB_PROXY_PORT"
+    #export OPENSHIFT_MONGODB_DB_PORT="27017"
+
+    echo "Mongo Port set to $OPENSHIFT_MONGODB_DB_PORT" 1>&2
+  fi
 fi
 
 if [ -z "$DB_DRIVER" ]; then
@@ -68,9 +93,7 @@ else
   fi
 fi
 
-echo 1>&2
 echo "Migrating storage and log directories..." 1>&2
-echo 1>&2
 # If this is initial installation, copy the default storage directory
 # from official Laravel installation and remove the log directory
 #
@@ -89,10 +112,3 @@ ln -sf ${OPENSHIFT_LOG_DIR}   ${OPENSHIFT_DATA_DIR}storage/logs
 if [  -f ${OPENSHIFT_REPO_DIR}.openshift/.env ]; then
   cp -f ${OPENSHIFT_REPO_DIR}.openshift/.env ${OPENSHIFT_REPO_DIR}/.env
 fi
-
-echo 1>&2
-echo "Running 'php artisan migrate --force'..." 1>&2
-echo 1>&2
-pushd ${OPENSHIFT_REPO_DIR} > /dev/null
-php artisan migrate --force
-popd > /dev/null
