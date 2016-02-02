@@ -91,7 +91,7 @@ return [
         ],
 
         'mongodb' => [
-            'driver'   => 'sqlsrv',
+            'driver'   => 'mongodb',
             'host'     => env('DB_HOST', env('OPENSHIFT_MONGODB_DB_HOST', 'localhost')),
             'port'     => env('DB_PORT', env('OPENSHIFT_MONGODB_DB_PORT', 27017)),
             'database' => env('DB_DATABASE', env('OPENSHIFT_APP_NAME', 'forge')),
