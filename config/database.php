@@ -93,12 +93,15 @@ return [
         'mongodb' => [
             'driver'   => 'sqlsrv',
             'host'     => env('DB_HOST', env('OPENSHIFT_MONGODB_DB_HOST', 'localhost')),
-            'port'     => env('DB_PORT', env('OPENSHIFT_MONGODB_DB_PORT', 5432)),
+            'port'     => env('DB_PORT', env('OPENSHIFT_MONGODB_DB_PORT', 27017)),
             'database' => env('DB_DATABASE', env('OPENSHIFT_APP_NAME', 'forge')),
             'username' => env('DB_USERNAME', env('OPENSHIFT_MONGODB_DB_USERNAME', 'forge')),
             'password' => env('DB_PASSWORD', env('OPENSHIFT_MONGODB_DB_PASSWORD', '')),
             'charset'  => 'utf8',
             'prefix'   => '',
+            'options'  => array(
+                'db' => env('DB_AUTHDB', env('OPENSHIFT_MONGODB_DB_AUTHDB', 'admin')) // sets the authentication database required by mongo 3
+            )
         ],
 
     ],
