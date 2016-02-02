@@ -17,3 +17,4 @@ chmod 777 ${OPENSHIFT_REPO_DIR}storage/framework
 chmod 777 ${OPENSHIFT_REPO_DIR}storage/framework/cache
 chmod 777 ${OPENSHIFT_REPO_DIR}storage/framework/sessions
 chmod 777 ${OPENSHIFT_REPO_DIR}storage/framework/views
+chmod 777 ${OPENSHIFT_REPO_DIR}bootstrap/cache
