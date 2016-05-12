@@ -30,8 +30,13 @@ server {
     listen  <%= ENV['OPENSHIFT_NGINX_IP'] %>:<%= ENV['OPENSHIFT_NGINX_PORT'] %>;
     root    <%= ENV['OPENSHIFT_REPO_DIR'] %>/public;
 
+    # To enable CORS uncomment the following 4 lines
+    #add_header 'Access-Control-Allow-Origin' '*';
+    #add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, PUT, DELETE, HEAD';
+    #add_header 'Access-Control-Allow-Credentials' 'true';
+    #add_header 'Access-Control-Allow-Headers' 'Origin,Content-Type,Accept,Authorization';
+    
     location / {
-        add_header 'Access-Control-Allow-Origin' '*';
         index  index.html index.htm index.php;
     }
 
