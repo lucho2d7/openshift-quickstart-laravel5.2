@@ -40,7 +40,7 @@ if [ ! -z "$OPENSHIFT_APP_DNS" ]; then
 fi
 
 if [ ! -z "$OPENSHIFT_SECRET_TOKEN" ]; then
-  export APP_KEY=${OPENSHIFT_SECRET_TOKEN:0:31}
+  export APP_KEY=${OPENSHIFT_SECRET_TOKEN:0:32}
   if [ "$(type -t set_env_var)" == "function" ]; then
     set_env_var 'APP_KEY' $APP_KEY $OPENSHIFT_HOMEDIR/.env/user_vars
   fi
