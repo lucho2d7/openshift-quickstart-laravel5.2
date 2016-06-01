@@ -115,3 +115,6 @@ ln -sf ${OPENSHIFT_LOG_DIR}   ${OPENSHIFT_DATA_DIR}storage/logs
 if [  -f ${OPENSHIFT_REPO_DIR}.openshift/.env ]; then
   cp -f ${OPENSHIFT_REPO_DIR}.openshift/.env ${OPENSHIFT_REPO_DIR}/.env
 fi
+
+# .openshift/action_hooks/deploy
+( cd $OPENSHIFT_REPO_DIR ; composer install --no-interaction --no-dev )
