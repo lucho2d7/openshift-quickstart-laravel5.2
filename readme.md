@@ -95,6 +95,13 @@ To stop tailing the logs, press *Ctrl + c*.
     ```
     rhc app create laravelapp php-5.4 postgresql-9.2 --from-code=https://github.com/lucho2d7/openshift-quickstart-laravel5.2
     ```
+    
+    or
+
+    ```
+    rhc app-create <_app_name_> --env OPENSHIFT_PHP_VERSION=5.6.16 http://cartreflect-claytondev.rhcloud.com/github/boekkooi/openshift-cartridge-nginx http://cartreflect-claytondev.rhcloud.com/github/boekkooi/openshift-cartridge-php mysql-5.5 --from-code=https://github.com/lucho2d7/openshift-quickstart-laravel5.2
+    ```
+      
 
 ## Additional Resources ##
 Documentation for the Laravel framework can be found on the [Laravel website](http://laravel.com/docs). Check 
